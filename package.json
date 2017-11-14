@@ -1,0 +1,29 @@
+{
+  "name": "bmw_signs_app",
+  "version": "1.0.0",
+  "description": "An app for BMW recruiting process.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guiklink/nodejs.git"
+  },
+  "keywords": [
+    "BMW",
+    "cars",
+    "signs"
+  ],
+  "author": "Guilherme Klink",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guiklink/nodejs/issues"
+  },
+  "homepage": "https://github.com/guiklink/nodejs#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.1"
+  }
+}
