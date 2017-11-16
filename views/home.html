@@ -1,0 +1,140 @@
+<html>
+<head>
+  <title>Sign Localizer</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="home.js"></script>
+
+  <script>
+  function validateInputForm() {
+      var name = document.forms["inputForm"]["name"].value;
+      var coord = document.forms["inputForm"]["coordinates"].value.split(',');
+      if (name == "") {
+          alert("Sign name is required.");
+          return false;
+      }
+      if (coord.length == 1 || coord[1] == "" || isNaN(parseFloat(coord[0])) || isNaN(parseFloat(coord[1]))) {
+          alert("Valid sign coordinates are required.");
+          return false;
+      }
+  }
+  </script>
+
+  <script>
+  function validateMapForm() {
+      var radius = document.forms["mapForm"]["radius"].value;
+      var coord = document.forms["mapForm"]["coordinates"].value.split(',');
+      if (radius == "" || isNaN(parseFloat(radius))) {
+          alert("A valid radius around the car is required.");
+          return false;
+      }
+      if (coord.length == 1 || coord[1] == "" || isNaN(parseFloat(coord[0])) || isNaN(parseFloat(coord[1]))) {
+          alert("Valid car coordinates are required.");
+          return false;
+      }
+  }
+  </script>
+
+  <script>
+  function getActionUpdate() {
+      var form = document.forms["mapForm"];
+      var radius = document.forms["mapForm"]["radius"].value;
+      var coord = document.forms["mapForm"]["coordinates"].value;
+
+      var action_src = "http://localhost:3000/signs/" + coord + "/" + radius;
+      form.action = action_src;
+      return true
+  }
+  </script>
+</head>
+
+
+<body>
+  <div style="margin:100px;">
+    <nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">Sign Localizer</a>
+    <ul class="nav navbar-nav">
+      <li class="active">
+        <a href="https://www.bmwusa.com/">Home</a>
+      </li>
+      <li>
+        <a href="/about">About</a>
+      </li>
+      <li>
+        <a href="/sitemap">Sitemap</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    <div class="jumbotron"  style="padding:40px;">
+
+      <div><center>
+        <img src="https://github.com/guiklink/nodejs/blob/master/images/bmw_logo.png?raw=true" alt="BMW_Logo">
+      </center></div>
+
+      <h1>Sign Localizer</h1>
+      <p>This is an web app to manage signs spotted by vehicles. Enter a sign name, its coordinates (lat,long) and click on “Store Sign” to store a new sign. Enter the coordinates and a valid radius to retrieve the signs within around the car.</p>
+     
+
+      <!-- Form for storing signs -->
+
+      <div>
+        <form name="inputForm" onsubmit="return validateInputForm()" action="http://localhost:3000/signs/" method="post" target="_blank">
+        <div class="form-group row">
+
+          <div class="col-xs-2">
+            <label for="ex1">Sign Name</label>
+            <input class="form-control" id="ex1" type="text" name="name">
+          </div>
+
+          <div class="col-xs-2">
+            <label for="ex1">Coordinates</label>
+            <input class="form-control" id="ex1" type="text" name="coordinates">
+          </div>
+
+        <br/>
+        <button type="submit" class="btn btn-info" formmethod="post">Store Sign</button>
+
+        </form>
+      </div>
+
+
+      <!-- Form for displaying map -->
+
+      <div>
+        <form name="mapForm" onsubmit="return validateMapForm()&getActionUpdate()" action="http://localhost:3000/signs/" method="get" action="map.html">
+        <div class="form-group row">
+
+          <div class="col-xs-2">
+            <label for="ex1">Coordinates</label>
+            <input class="form-control" id="ex1" type="text" name="coordinates">
+          </div>
+
+          <div class="col-xs-1">
+            <label for="ex1">Radius</label>
+            <input class="form-control" id="ex1" type="text" name="radius">
+          </div>
+
+        <br/>
+        <button type="submit" class="btn btn-info" formmethod="get">Display Signs</button>
+
+        </form>
+      </div>
+
+    </div>
+
+<!--       <div>
+        <label class="radio-inline"><input type="radio" name="optradio">Option 1</label>
+        <label class="radio-inline"><input type="radio" name="optradio">Option 2</label>
+        <label class="radio-inline"><input type="radio" name="optradio">Option 3</label>
+      </div> -->
+
+<!--       <p><a class="btn btn-primary btn-lg" href="#" role="button">Store Sign</a></p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Retrieve Signs</a></p> -->
+    </div>
+  </div>
+</body>
+</html>
