@@ -82,9 +82,9 @@ router.get('/:id', function (req, res) {
 router.get('/:coordinates/:radius', function (req, res) {
 	var coord = req.params.coordinates.split(',').map(parseFloat);
 	var radius = parseFloat(req.params.radius)
-	console.log("I in the proper place!")
-	console.log(coord)
-	console.log(radius)
+	// console.log("I in the proper place!")
+	// console.log(coord)
+	// console.log(radius)
 
     Sign.aggregate(
 			{$geoNear:{
@@ -99,8 +99,9 @@ router.get('/:coordinates/:radius', function (req, res) {
     	function (err, sign) {
 	        if (err) 
 	        	return res.status(500).send(err);
-
-	        res.render('test.html', {data:sign});
+	        // out = docs.map(function(doc) { return doc.tag; });
+	        res.render('test.html', {data:[sign], lat: sign[0]["coordinates"][0]});
+	        // res.json(sign)
         	// res.status(200).send(sign[0]["coordinates"]);
     	});
 });

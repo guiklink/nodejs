@@ -6,6 +6,7 @@ var engine = require('consolidate');
 
 // Pick an HTML Rendering Engine
 app.set('views', __dirname + '/views');
+// app.engine('html', require('ejs').renderFile);
 app.engine('html', engine.mustache);
 app.set('view engine', 'html');
 
