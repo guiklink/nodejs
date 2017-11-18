@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="home.js"></script>
 
   <script>
   function validateInputForm() {
@@ -13,6 +12,10 @@
       var coord = document.forms["inputForm"]["coordinates"].value.split(',');
       if (name == "") {
           alert("Sign name is required.");
+          return false;
+      }
+      if (!/^\w+$/.test(name)) {
+          alert("Sign name can only conatin '_', letters and numbers.");
           return false;
       }
       if (coord.length == 1 || coord[1] == "" || isNaN(parseFloat(coord[0])) || isNaN(parseFloat(coord[1]))) {
