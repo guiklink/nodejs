@@ -33,7 +33,7 @@
         var coordinates = "{{coord}}";
         var radius = {{radius}};
 
-        $.get('/signs/testFunction/' + coordinates + '/' + radius).then(function(data){
+        $.get('/signs/retrieveSigns/' + coordinates + '/' + radius).then(function(data){
               //this data is what you want to use at js.
               console.log(data);
 

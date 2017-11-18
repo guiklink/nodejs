@@ -90,7 +90,7 @@ router.get('/:coordinates/:radius', function (req, res) {
     res.render('map.html', {coord:req.params.coordinates, radius: parseFloat(req.params.radius)});
 });
 
-router.get('/testFunction/:coordinates/:radius', function (req, res) {
+router.get('/retrieveSigns/:coordinates/:radius', function (req, res) {
 	var coord = req.params.coordinates.split(',').map(parseFloat);
 	var radius = parseFloat(req.params.radius);
 
