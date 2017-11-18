@@ -37,7 +37,9 @@
               //this data is what you want to use at js.
               console.log(data);
 
-              var mapCenter = {lat: 41.910891, lng: -87.642868};
+              var centerLatLong = coordinates.split(',').map(parseFloat);
+
+              var mapCenter = {lat: centerLatLong[0], lng: centerLatLong[1]};
 
               var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 15,
