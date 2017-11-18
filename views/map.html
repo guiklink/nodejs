@@ -38,13 +38,18 @@
               console.log(data);
 
               var centerLatLong = coordinates.split(',').map(parseFloat);
-
               var mapCenter = {lat: centerLatLong[0], lng: centerLatLong[1]};
 
               var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 15,
                 center: mapCenter
               });
+
+                var marker = new google.maps.Marker({
+                  position: mapCenter,
+                  map: map,
+                  title: "Vehicle Position"
+                });
 
               var i;
               for (i = 0; i < data.length; i++) {
@@ -53,6 +58,7 @@
 
                 var marker = new google.maps.Marker({
                   position: {lat: marker_coord[1], lng: marker_coord[0]},
+                  icon: "https://chart.googleapis.com/chart?chst=d_bubble_text_small&chld=bb|" + marker_name + "|C6EF8C|000000",
                   map: map,
                   title: marker_name
                 });
