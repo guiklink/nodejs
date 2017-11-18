@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <p id="p1"></p>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple markers</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -15,51 +17,61 @@
         padding: 0;
       }
     </style>
+
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
   </head>
   <body>
     <div id="map"></div>
     <script>
-      document.getElementById("p1").innerHTML = {{data}}[0]["coordinates"][0];
-      var locations = {{data}};
-      var map;
+
       function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 2,
-          center: new google.maps.LatLng(2.8,-187.3),
-          mapTypeId: 'terrain'
-        });
 
-        // Create a <script> tag and set the USGS URL as the source.
-        var script = document.createElement('script');
-        // This example uses a local copy of the GeoJSON stored at
-        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-        script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-        // script.src = locations
-        document.getElementsByTagName('head')[0].appendChild(script);
-      }
+        var coordinates = "{{coord}}";
+        var radius = {{radius}};
 
-      // window.eqfeed_callback = function(results) {
-      //   for (var i = 0; i < results.length; i++) {
-      //     var coords = results[i].coordinates;
-      //     var latLng = new google.maps.LatLng(coords[1],coords[0]);
-      //     var marker = new google.maps.Marker({
-      //       position: latLng,
-      //       map: map
-      //     });
-      //   }
-      // }
+        $.get('/signs/testFunction/' + coordinates + '/' + radius).then(function(data){
+              //this data is what you want to use at js.
+              console.log(data);
 
-      // Loop through the results array and place a marker for each
-      // set of coordinates.
-      window.eqfeed_callback = function(results) {
-        for (var i = 0; i < results.features.length; i++) {
-          var coords = results.features[i].geometry.coordinates;
-          var latLng = new google.maps.LatLng(coords[1],coords[0]);
-          var marker = new google.maps.Marker({
-            position: latLng,
-            map: map
+              var mapCenter = {lat: 41.910891, lng: -87.642868};
+
+              var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: mapCenter
+              });
+
+              var i;
+              for (i = 0; i < data.length; i++) {
+                var marker_coord = data[i]["coordinates"]
+                var marker_name = data[i]["_id"]
+
+                var marker = new google.maps.Marker({
+                  position: {lat: marker_coord[1], lng: marker_coord[0]},
+                  map: map,
+                  title: marker_name
+                });
+
+              }
+
           });
-        }
+
+        // var myLatLng = {lat: -25.363, lng: 131.044};
+
+        // var map = new google.maps.Map(document.getElementById('map'), {
+        //   zoom: 4,
+        //   center: myLatLng
+        // });
+
+        // var marker = new google.maps.Marker({
+        //   position: myLatLng,
+        //   map: map,
+        //   title: 'Hello World!'
+        // });
+
       }
     </script>
     <script async defer

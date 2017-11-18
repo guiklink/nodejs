@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 
+var testData;
+
 router.use(bodyParser.urlencoded({ extended: true }));
 
 var Sign = require('../models/SignModel');
@@ -80,31 +82,41 @@ router.get('/:id', function (req, res) {
 
 // GETS A LIST OF SIGNS WITHIN A RANGE
 router.get('/:coordinates/:radius', function (req, res) {
-	var coord = req.params.coordinates.split(',').map(parseFloat);
-	var radius = parseFloat(req.params.radius)
 	// console.log("I in the proper place!")
 	// console.log(coord)
 	// console.log(radius)
+    console.log("Opening map...")
 
-    Sign.aggregate(
-			{$geoNear:{
-			  "near":{"type":"Point","coordinates":[coord[1],coord[0]]},
-			  "distanceField":"calculated",
-			  "maxDistance":parseFloat(radius),
-			  "spherical": true
-			}},
-			{$sort:{"calculated":1}},
-			{$group:{"_id": "$name", "coordinates": { "$first": "$coordinates" }, "calculated": { "$first": "$calculated" }}}, 
-			{$sort:{"calculated":1}},
-    	function (err, sign) {
-	        if (err) 
-	        	return res.status(500).send(err);
-	        // out = docs.map(function(doc) { return doc.tag; });
-	        res.render('test.html', {data:[sign], lat: sign[0]["coordinates"][0]});
-	        // res.json(sign)
-        	// res.status(200).send(sign[0]["coordinates"]);
-    	});
+    res.render('map.html', {coord:req.params.coordinates, radius: parseFloat(req.params.radius)});
 });
+
+router.get('/testFunction/:coordinates/:radius', function (req, res) {
+	var coord = req.params.coordinates.split(',').map(parseFloat);
+	var radius = parseFloat(req.params.radius);
+
+	Sign.aggregate(
+		{$geoNear:{
+		  "near":{"type":"Point","coordinates":[coord[1],coord[0]]},
+		  "distanceField":"calculated",
+		  "maxDistance":parseFloat(radius),
+		  "spherical": true
+		}},
+		{$sort:{"calculated":1}},
+		{$group:{"_id": "$name", "coordinates": { "$first": "$coordinates" }, "calculated": { "$first": "$calculated" }}}, 
+		{$sort:{"calculated":1}},
+	function (err, sign) {
+		if (err) 
+			return res.status(500).send(err);
+		
+        console.log("Loading JSON...")
+        console.log(sign)
+		res.json(sign);
+		
+	});
+
+	
+});
+
 
 // 41.910891,-87.642868/100000
 

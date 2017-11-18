@@ -1,10 +1,26 @@
-<h1>TESTANDO AHAUHAUAUHUAHU</h1>
 
-<p id="p1">{{data}}</p>
+<script
+src="https://code.jquery.com/jquery-3.2.1.min.js"
+integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+crossorigin="anonymous"></script>
+
+<h1>TESTANDO</h1>
+
+<p id="p1"></p>
 
 <script>
-	document.getElementById("p1").innerHTML = {{lat}}
-	var a = {{data}}.length;
-	console.log(a);
+	$(function(){
+
+	 var coordinates = "{{coord}}";
+	 var radius = {{radius}};
+
+    $.get('/signs/testFunction/' + coordinates + '/' + radius).then(function(data){
+		//this data is what you want to use at js.
+		console.log(data);
+
+	  });
+
+	});
+	
 </script>
 
