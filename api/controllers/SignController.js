@@ -9,23 +9,10 @@ router.use(bodyParser.urlencoded({ extended: true }));
 var Sign = require('../models/SignModel');
 
 
+  //////////////////////////////
+ // Insert a sign into the DB /
+//////////////////////////////
 
-// // INSERT A VALUE IN THE DB 
-// router.post('/', function (req, res) {
-//     Sign.create({
-//             name : req.body.name,
-//             lat : req.body.lat,
-//             long : req.body.long,
-//             //created_date : req.body.created_date
-//         }, 
-//         function (err, sign) {
-//             if (err) 
-//             	return res.status(500).send(err);
-//             res.status(200).send(sign);
-//         });
-// });
-
-// INSERT A VALUE IN THE DB 
 router.post('/', function (req, res) {
 	var coord = req.body.coordinates.split(',').map(Number); // retrieve coordinates
     Sign.create({
@@ -41,7 +28,10 @@ router.post('/', function (req, res) {
 });
 
 
-// RETURNS ALL THE USERS IN THE DATABASE
+  /////////////////////////////////
+ // Get all the values in the DB /
+/////////////////////////////////
+
 router.get('/', function (req, res) {
 	console.log("Shouldnt be here. Returning all users.")
     Sign.find({}, function (err, signs) {
@@ -52,7 +42,13 @@ router.get('/', function (req, res) {
 });
 
 
-// GETS A SINGLE USER FROM THE DATABASE
+
+  //////////////////////
+ // Get a sign by ID //
+//////////////////////
+
+// id : MongoDB _id
+
 router.get('/:id', function (req, res) {
     Sign.findById(req.params.id, function (err, sign) {
         if (err) 
@@ -65,30 +61,27 @@ router.get('/:id', function (req, res) {
 });
 
 
-// GETS A LIST OF SIGNS WITHIN A RANGE
-// router.get('/:lat/:long/:radius', function (req, res) {
-// 	var point = { type : 'Point', coordinates : [parseFloat(req.params.long),parseFloat(req.params.lat)], index: '2dsphere'};
-// 	var options = {maxDistance : parseFloat(req.params.radius), spherical : true};
-//     Sign.geoNear(point, options, function (err, sign) {
-//         if (err) 
-//         	return res.status(500).send(point);
 
+  ///////////////////////////
+ // Render Google Maps HTML/
+///////////////////////////
 
+// coordinates (lat, long)
+// radius: a number of meters (float)
 
-//         res.status(200).send(sign);
-//     });
-// });
-
-
-// GETS A LIST OF SIGNS WITHIN A RANGE
 router.get('/:coordinates/:radius', function (req, res) {
-	// console.log("I in the proper place!")
-	// console.log(coord)
-	// console.log(radius)
     console.log("Opening map...")
 
-    res.render('map.html', {coord:req.params.coordinates, radius: parseFloat(req.params.radius)});
+    res.render('map.html', {coord:req.params.coordinates, radius: req.params.radius});
 });
+
+
+  ///////////////////////////////////////////////////////////////////
+ // Retrieves a JSON with the signs within a range (m) from the DB /
+///////////////////////////////////////////////////////////////////
+
+// coordinates (lat, long)
+// radius: a number of meters (float)
 
 router.get('/retrieveSigns/:coordinates/:radius', function (req, res) {
 	var coord = req.params.coordinates.split(',').map(parseFloat);
@@ -118,9 +111,12 @@ router.get('/retrieveSigns/:coordinates/:radius', function (req, res) {
 });
 
 
-// 41.910891,-87.642868/100000
+  ////////////////////////
+ // Delete a sign by ID /
+////////////////////////
 
-// DELETES A USER FROM THE DATABASE
+// id : MongoDB _id
+
 router.delete('/:id', function (req, res) {
     Sign.findByIdAndRemove(req.params.id, function (err, sign) {
         if (err) 
@@ -131,7 +127,12 @@ router.delete('/:id', function (req, res) {
 });
 
 
-// UPDATES A SINGLE USER IN THE DATABASE
+  ////////////////////////
+ // Update a sign by ID /
+////////////////////////
+
+// id : MongoDB _id
+
 router.put('/:id', function (req, res) {
     
     Sign.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, sign) {
