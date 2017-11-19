@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
+  <!-- Function to validate the input fields for a new sign. -->
   <script>
   function validateInputForm() {
       var name = document.forms["inputForm"]["name"].value;
@@ -22,9 +23,19 @@
           alert("Valid sign coordinates are required.");
           return false;
       }
+      return signSubmitted();
   }
   </script>
 
+  <!-- Pop up to for when a sign is submitted sucessfully. -->
+  <script>
+  function signSubmitted() {
+      alert("SIGN SUBMITTED!");
+      return true
+  }
+  </script>
+
+  <!-- Function to validates the input for for the map request -->
   <script>
   function validateMapForm() {
       var radius = document.forms["mapForm"]["radius"].value;
@@ -40,6 +51,7 @@
   }
   </script>
 
+  <!-- Function to send the parameters for the proper GET routing -->
   <script>
   function getActionUpdate() {
       var form = document.forms["mapForm"];
@@ -64,10 +76,7 @@
         <a href="https://www.bmwusa.com/">Home</a>
       </li>
       <li>
-        <a href="/about">About</a>
-      </li>
-      <li>
-        <a href="/sitemap">Sitemap</a>
+        <a href="http://guiklink.github.io/portfolio/">About</a>
       </li>
     </ul>
   </div>
@@ -85,7 +94,7 @@
       <!-- Form for storing signs -->
 
       <div>
-        <form name="inputForm" onsubmit="return validateInputForm()" action="http://localhost:3000/signs/" method="post" target="_blank">
+        <form name="inputForm" onsubmit="return validateInputForm()" action="http://localhost:3000/signs/" method="post">
         <div class="form-group row">
 
           <div class="col-xs-2">

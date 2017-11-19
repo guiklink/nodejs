@@ -23,7 +23,6 @@ router.post('/', function (req, res) {
         function (err, sign) {
             if (err) 
             	return res.status(500).send(err);
-            res.status(200).send(sign);
         });
 });
 
