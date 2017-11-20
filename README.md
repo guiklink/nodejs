@@ -1,6 +1,12 @@
 # Signs Localizer
 This web app provides a way to enter traffic signs and localize them on a map, solving the [challenge](https://github.com/BMWGroupTechnologyOfficeUSA/dli-coding-challenge) proposed in the BMW github. In my solution I used Node.js in [Express](https://expressjs.com/), a framework based on the **REST** paradigm.
 
+## Goals
+
+* Provide a way to insert new signs
+* Store signs into a database
+* Provide a way to plot a map with the closest signs of each type within a range
+
 ## Modules and Packages
 Bellow, it is listed all the packages used in my implementation. I chose [npm](https://www.npmjs.com/) to manage and install packages, make sure you have it installed and run all the commands bellow if you wish to build the web service from source.
 
@@ -48,6 +54,20 @@ To retrieve a map with the closest signs enter the coordinates on the second row
 | Coordinates | Radius (m)|
 |-----------|-------------|
 |41.911748, -87.651921 | 1000|
+
+
+PS: Bellow are some signs by my apartment in Chicago that I have already stored in the DB, and they can been seem right away (imagine that the car is parked by my gym on coordinates 41.910891,-87.642868).
+
+| Sign Name | Coordinates |
+|-----------|-------------|
+| SPEED_LIMIT_30 | 41.912218,-87.628549 |
+| SPEED_LIMIT_50 | 41.902701,-87.624113 |
+| SPEED_LIMIT_70 | 41.905765,-87.660845 |
+|PASSING_RESTRICTION | 42.057077,-87.676962 |
+| STOP | 41.903868,-87.634401 |
+| STOP | 41.9111,-87.633087 |
+| NO_PARKING | 41.911748, -87.651921 |
+
 
 ## Persistent Database
 My choice for persistent storage was the NoSQL database MongoDB. These types of databases stand out for their low latency, high performance, scalability and how easy they are to integrate with mobile applications, factors that are very welcome when if considered that the final goal of this project is to be deployed in a crescent fleet of BMW vehicles. 
