@@ -9,9 +9,9 @@ router.use(bodyParser.urlencoded({ extended: true }));
 var Sign = require('../models/SignModel');
 
 
-  //////////////////////////////
- // Insert a sign into the DB /
-//////////////////////////////
+  ///////////////////////////////
+ // Insert a sign into the DB //
+///////////////////////////////
 
 router.post('/', function (req, res) {
 	var coord = req.body.coordinates.split(',').map(Number); // retrieve coordinates
@@ -27,9 +27,9 @@ router.post('/', function (req, res) {
 });
 
 
-  /////////////////////////////////
- // Get all the values in the DB /
-/////////////////////////////////
+  //////////////////////////////////
+ // Get all the values in the DB //
+//////////////////////////////////
 
 router.get('/', function (req, res) {
 	console.log("Shouldnt be here. Returning all users.")
@@ -61,9 +61,9 @@ router.get('/:id', function (req, res) {
 
 
 
-  ///////////////////////////
- // Render Google Maps HTML/
-///////////////////////////
+  ////////////////////////////
+ // Render Google Maps HTML//
+////////////////////////////
 
 // coordinates (lat, long)
 // radius: a number of meters (float)
@@ -75,9 +75,9 @@ router.get('/:coordinates/:radius', function (req, res) {
 });
 
 
-  ///////////////////////////////////////////////////////////////////
- // Retrieves a JSON with the signs within a range (m) from the DB /
-///////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+ // Retrieves a JSON with the signs within a range (m) from the DB //
+////////////////////////////////////////////////////////////////////
 
 // coordinates (lat, long)
 // radius: a number of meters (float)
@@ -110,9 +110,9 @@ router.get('/retrieveSigns/:coordinates/:radius', function (req, res) {
 });
 
 
-  ////////////////////////
- // Delete a sign by ID /
-////////////////////////
+  /////////////////////////
+ // Delete a sign by ID //
+/////////////////////////
 
 // id : MongoDB _id
 
@@ -126,9 +126,9 @@ router.delete('/:id', function (req, res) {
 });
 
 
-  ////////////////////////
- // Update a sign by ID /
-////////////////////////
+  /////////////////////////
+ // Update a sign by ID //
+/////////////////////////
 
 // id : MongoDB _id
 
