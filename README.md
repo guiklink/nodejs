@@ -44,16 +44,16 @@ Fill the field "Sign Name" and "Coordinates" on the first row.
 *  Coordinates should entered as ***Latitude,Longitude***
 
 #### Example
-| Sign Name | Coordinates |
-|-----------|-------------|
-| NO_PARKING|41.911748, -87.651921 |
+
+![alt text](https://github.com/guiklink/nodejs/blob/master/images/example1.png?raw=true)
+
 
 ### Retrieving Signs Map
 To retrieve a map with the closest signs enter the coordinates on the second row and the maximum distance in **meters** of the signs that will be retrieved. As a reminder, only the closest sign of each type will be retrieved.
+
 #### Example
-| Coordinates | Radius (m)|
-|-----------|-------------|
-|41.911748, -87.651921 | 1000|
+
+![alt text](https://github.com/guiklink/nodejs/blob/master/images/example2.png?raw=true)
 
 
 PS: Bellow are some signs by my apartment in Chicago that I have already stored in the DB, and they can been seem right away (imagine that the car is parked by my gym on coordinates 41.910891,-87.642868).
