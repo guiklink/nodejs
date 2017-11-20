@@ -23,6 +23,24 @@ The [body-parser](https://www.npmjs.com/package/body-parser) parse incoming requ
 Once all the packages above are installed, the app can be ran by calling the the api on the project's root directory.
 ```node server.js```
 
+### Inserting a new sign
+Fill the field "Sign Name" and "Coordinates" on the first row.
+
+* Sign Name is a enum that takes the following entries: ***'SPEED_LIMIT_30', 'SPEED_LIMIT_50', 'SPEED_LIMIT_70', 'PASSING_RESTRICTION', 'STOP', 'NO_PARKING', 'NO_U_TURN', 'NO_LEFT_TURN', 'NO_RIGHT_TURN', 'NO_TRUCK', 'RIGHT_TURN_AHEAD', 'LEFT_TURN_AHEAD'***
+*  Coordinates should be enter as ***Latitude,Longitude***
+
+#### Example
+| Sign Name | Coordinates |
+|-----------|-------------|
+| NO_PARKING|41.911748, -87.651921 |
+
+### Retrieving Signs Map
+To retrieve a map with the closest signs enter the coordinates on the second row and the maximum distance in **meters** of the signs that will be retrieved.
+#### Example
+| Coordinates | Radius (m)|
+|-----------|-------------|
+|41.911748, -87.651921 | 1000|
+
 ## Persistent Database
 My choice for persistent storage was the NoSQL database MongoDB. This types of databases stand out for their low latency, high performance, easy scalability and how easy they are to integrate with mobile applications, factors that are very welcome when remembered that the final goal of this project is to be deployed in a crescent fleet of BMW vehicles. 
 Current I am storing my MongoDB in a free demo subscription at [mLab](https://mlab.com/).
@@ -45,4 +63,6 @@ This file contain the information required to connect to the database.
 Sets the the port to listen to and starts the app (see command above).
 
 ## Next Steps
-
+The next steps to improve this app would be:
+1. Add a login page that takes an user name and a password.
+2. Encode files containing sensitive information (such as the Google Maps key). 
