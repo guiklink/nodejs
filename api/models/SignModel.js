@@ -5,29 +5,12 @@ require('mongoose-double')(mongoose);
 var SchemaTypes = mongoose.Schema.Types;
 
 
-// var SignSchema = new Schema({
-//   name: {
-//     type: String,
-//     required: 'A sign needs a name.'
-//   },
-//   lat: {
-//     type: SchemaTypes.Double,
-//     required: 'A sign needs a latitude.'
-//   },
-//   long: {
-//     type: SchemaTypes.Double,
-//     required: 'A sign needs a longitude.'
-//   },
-//   created_date: {
-//     type: Date,
-//     default: Date.now
-//   }
-// });
 
 var SignSchema = new Schema({
   name: {
     type: String,
-    required: 'A sign needs a name.'
+    required: 'A sign needs a name.',
+    enum: ['SPEED_LIMIT_30', 'SPEED_LIMIT_50', 'SPEED_LIMIT_70', 'PASSING_RESTRICTION', 'STOP', 'NO_PARKING', 'NO_U_TURN', 'NO_LEFT_TURN', 'NO_RIGHT_TURN', 'NO_TRUCK', 'RIGHT_TURN_AHEAD', 'LEFT_TURN_AHEAD']
   },
     coordinates: { 
       type: [Number], index: '2dsphere',
@@ -39,17 +22,6 @@ var SignSchema = new Schema({
   }
 });
 
-//SignSchema.index({'coordinates' : '2dsphere'})
-
-// var SignSchema = new Schema({
-//   properties: {
-//     name:       { type: String, required: 'A sign needs a name.' },
-//     date:        { type:Date, default:Date.now }
-//   },
-//   geometry: {
-//     coordinates: { type: [Number], index: '2dsphere'}
-//   }
-// });
 
 mongoose.model('Sign', SignSchema);
 
