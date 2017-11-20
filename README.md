@@ -22,6 +22,8 @@ The [body-parser](https://www.npmjs.com/package/body-parser) parse incoming requ
 ## Running it locally
 Once all the packages above are installed, the app can be ran by calling the the api on the project's root directory.
 ```node server.js```
+Now on a web browser enter: 
+```http://localhost:3000/```
 
 ### Inserting a new sign
 Fill the field "Sign Name" and "Coordinates" on the first row.
