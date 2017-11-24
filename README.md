@@ -27,7 +27,12 @@ Without this package mongoose cannot handle double values by default (even thoug
 [Mustache](https://www.npmjs.com/package/mustache) is a logic-less template syntax in JavaScript that facilitates accessing values transmitted by the back-end to the front-end when rendering a view.
 
 ```npm install body-parser```
+
 The [body-parser](https://www.npmjs.com/package/body-parser) parse incoming request bodies from a URL.
+
+```npm install consolidate```
+
+The [consolidate](https://www.npmjs.com/package/consolidate) is the template engine from Express.
 
 ## Running it locally
 Once all the packages above are installed, the app can be ran by calling the the api on the project's root directory.
