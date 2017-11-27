@@ -35,7 +35,7 @@ router.get('/', function (req, res) {
 	console.log("Shouldnt be here. Returning all users.")
     Sign.find({}, function (err, signs) {
         if (err) 
-        	return res.status(500).send(err);
+        	return res.status(500).send(err); // Internal Server error
         res.status(200).send(signs);
     });
 });
@@ -51,9 +51,9 @@ router.get('/', function (req, res) {
 router.get('/:id', function (req, res) {
     Sign.findById(req.params.id, function (err, sign) {
         if (err) 
-        	return res.status(500).send(err);
+        	return res.status(500).send(err); // Internal Server error
         if (!sign) 
-        	return res.status(404).send("Sign could not be found.");
+        	return res.status(404).send("Sign could not be found."); // Not found
 
         res.status(200).send(sign);
     });
@@ -98,7 +98,7 @@ router.get('/retrieveSigns/:coordinates/:radius', function (req, res) {
 		{$sort:{"calculated":1}},
 	function (err, sign) {
 		if (err) 
-			return res.status(500).send(err);
+			return res.status(500).send(err); // Internal Server error
 		
         console.log("Loading JSON...")
         console.log(sign)
@@ -119,7 +119,7 @@ router.get('/retrieveSigns/:coordinates/:radius', function (req, res) {
 router.delete('/:id', function (req, res) {
     Sign.findByIdAndRemove(req.params.id, function (err, sign) {
         if (err) 
-        	return res.status(500).send(err);
+        	return res.status(500).send(err); // Internal Server error
 
         res.status(200).send("Sign "+ sign.name +" was deleted.");
     });
@@ -136,7 +136,7 @@ router.put('/:id', function (req, res) {
     
     Sign.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, sign) {
         if (err) 
-        	return res.status(500).send(err);
+        	return res.status(500).send(err); // Internal Server error
         res.status(200).send(sign);
     });
 });
