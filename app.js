@@ -15,7 +15,7 @@ app.use('/signs', SignController);
 
 // Load HTML
 app.get('/',function(req,res){
-  res.sendFile(__dirname + '/views/home.html');
+  res.render('home.html');
   // TO DO: add a error handler for the response
 });
 
